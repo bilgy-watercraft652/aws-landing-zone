@@ -6,7 +6,7 @@ A production-grade AWS Landing Zone implementation demonstrating enterprise-leve
 
 This project implements a secure, scalable AWS multi-account architecture aligned with banking and financial services compliance requirements. Built entirely with Terraform, it demonstrates enterprise cloud engineering skills including organizational security policies, centralized logging, threat detection, and cross-account access management.
 
-**Project Duration:** 2 days (April 1-2, 2026)
+**Project Duration:** 2 Weeks
 **Infrastructure as Code:** Terraform 1.0+
 **AWS Services:** 15+ services integrated
 
