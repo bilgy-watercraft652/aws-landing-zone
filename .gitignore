@@ -1,0 +1,29 @@
+# Terraform files
+*.tfstate
+*.tfstate.*
+*.tfvars
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate.backup
+
+# Sensitive information
+project-ids.txt
+*.pem
+*.key
+*.credentials
+
+# macOS files
+.DS_Store
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Backup files
+*.backup
+*.bak
+
+# Log files
+*.log
